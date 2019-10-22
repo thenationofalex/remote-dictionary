@@ -1,0 +1,8 @@
+{
+  "name": "remote-dictionary",
+  "version": "1.0.0",
+  "author": "thenationofalex",
+  "dependencies": {
+    "lerna": "^3.18.2"
+  }
+}

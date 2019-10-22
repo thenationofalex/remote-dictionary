@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "moduleResolution": "node",
+    "module": "commonjs",
+    "sourceMap": true,
+    "rootDir": "src",
+    "outDir": "build",
+    "lib": ["esnext", "es2015.iterable", "dom", "dom.iterable", "scripthost"],
+    "skipLibCheck": true,
+    "pretty": true
+  },
+  "exclude": ["tests"]
+}

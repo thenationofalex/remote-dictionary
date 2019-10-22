@@ -1,0 +1,30 @@
+{
+  "name": "remote-dictionary-api",
+  "version": "0.0.0-alpha",
+  "description": "cspell dictionary api",
+  "main": "src/index.ts",
+  "scripts": {
+    "compile": "tsc",
+    "dev": "NODE_ENV=local nodemon -e ts -x ts-node src/index.ts",
+    "start": "ts-node src/index.ts",
+    "lint": "tslint -c tslint.json 'src/**/*.{ts,tsx}'"
+  },
+  "author": "thenationofalex",
+  "dependencies": {
+    "@hapi/hapi": "^18.4.0",
+    "@hapi/inert": "^5.2.2",
+    "@hapi/joi": "15.1.1",
+    "@hapi/vision": "^5.5.4",
+    "aws-sdk": "^2.553.0",
+    "hapi-swagger": "^10.2.0",
+    "lodash": "^4.17.15"
+  },
+  "devDependencies": {
+    "@types/hapi": "^18.0.2",
+    "@types/node": "^12.11.2",
+    "nodemon": "^1.19.4",
+    "ts-node": "^8.4.1",
+    "tslint": "^5.20.0",
+    "typescript": "^3.6.4"
+  }
+}
