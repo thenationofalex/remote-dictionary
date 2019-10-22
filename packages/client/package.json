@@ -1,0 +1,25 @@
+{
+  "name": "remote-dictionary-client",
+  "version": "0.0.0-alpha",
+  "description": "cspell dictionary client",
+  "main": "src/index.ts",
+  "scripts": {
+    "compile": "tsc",
+    "start": "node -r ts-node/register src/index.ts",
+    "lint": "tslint -c tslint.json 'src/**/*.{ts,tsx}'"
+  },
+  "author": "thenationofalex",
+  "dependencies": {
+    "commander": "^3.0.2",
+    "cspell": "^4.0.30",
+    "lodash": "^4.17.15",
+    "shortid": "^2.2.15",
+    "tmp": "^0.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^12.11.2",
+    "ts-node": "^8.4.1",
+    "tslint": "^5.20.0",
+    "typescript": "^3.6.4"
+  }
+}
