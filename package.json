@@ -15,7 +15,8 @@
   },
   "husky": {
     "hooks": {
-      "commit-msg": "./node_modules/.bin/commitlint -e $HUSKY_GIT_PARAMS"
+      "commit-msg": "./node_modules/.bin/commitlint -e $HUSKY_GIT_PARAMS",
+      "pre-commit": "lerna run lint"
     }
   }
 }
