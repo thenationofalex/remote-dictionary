@@ -5,16 +5,15 @@ import { deleteDictionary, getDictionary, patchDictionary } from '../../services
 export const dictionary = [
   {
     method: 'GET',
-    path: '/dictionary',
     options: {
       description: 'Retrieve cSpell config file',
       handler: (req, h) => getDictionary(),
       tags: ['api']
-    }
+    },
+    path: '/dictionary'
   },
   {
     method: 'PATCH',
-    path: '/dictionary',
     options: {
       description: 'Add new words to API',
       handler: (req, h) => patchDictionary(req.payload.words),
@@ -24,11 +23,11 @@ export const dictionary = [
           words: Joi.array().items(Joi.string())
         })
       }
-    }
+    },
+    path: '/dictionary'
   },
   {
     method: 'DELETE',
-    path: '/dictionary',
     options: {
       description: 'Delete word from API',
       handler: (req, h) => deleteDictionary(req.payload.words),
@@ -38,6 +37,7 @@ export const dictionary = [
           words: Joi.string()
         })
       }
-    }
+    },
+    path: '/dictionary'
   },
 ]

@@ -3,11 +3,16 @@
   "version": "0.0.0-alpha",
   "description": "cspell dictionary api",
   "main": "src/index.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/thenationofalex/remote-dictionary"
+  },
   "scripts": {
     "compile": "tsc",
     "dev": "NODE_ENV=local nodemon -e ts -x ts-node src/index.ts",
     "start": "ts-node src/index.ts",
-    "lint": "tslint -c tslint.json 'src/**/*.{ts,tsx}'"
+    "lint": "tslint -c tslint.json 'src/**/*.{ts,tsx}'",
+    "test": "jest"
   },
   "author": "thenationofalex",
   "dependencies": {
@@ -21,8 +26,11 @@
   },
   "devDependencies": {
     "@types/hapi": "^18.0.2",
+    "@types/jest": "^24.0.19",
     "@types/node": "^12.11.2",
+    "jest": "^24.9.0",
     "nodemon": "^1.19.4",
+    "ts-jest": "^24.1.0",
     "ts-node": "^8.4.1",
     "tslint": "^5.20.0",
     "typescript": "^3.6.4"
