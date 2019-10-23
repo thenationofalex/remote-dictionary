@@ -1,25 +1,48 @@
 {
   "name": "remote-dictionary-client",
+  "description": "remote dictionary client",
   "version": "0.0.0-alpha",
-  "description": "cspell dictionary client",
-  "main": "src/index.ts",
-  "scripts": {
-    "compile": "tsc",
-    "start": "node -r ts-node/register src/index.ts",
-    "lint": "tslint -c tslint.json 'src/**/*.{ts,tsx}'"
-  },
   "author": "thenationofalex",
+  "bin": {
+    "remote-dictionary-client": "./bin/run"
+  },
+  "bugs": "https://github.com/thenationofalex/remote-dictionary/issues",
   "dependencies": {
-    "commander": "^3.0.2",
+    "@oclif/command": "^1.5.19",
+    "@oclif/config": "^1.13.3",
+    "@oclif/plugin-help": "^2.2.1",
+    "@types/tmp": "^0.1.0",
+    "axios": "^0.19.0",
     "cspell": "^4.0.30",
-    "lodash": "^4.17.15",
-    "shortid": "^2.2.15",
-    "tmp": "^0.1.0"
+    "path": "^0.12.7",
+    "tmp": "^0.1.0",
+    "tslib": "^1.10.0"
   },
   "devDependencies": {
-    "@types/node": "^12.11.2",
+    "@oclif/tslint": "^3.1.1",
+    "@types/node": "^10.14.22",
     "ts-node": "^8.4.1",
     "tslint": "^5.20.0",
     "typescript": "^3.6.4"
-  }
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "files": [
+    "/bin",
+    "/lib"
+  ],
+  "homepage": "https://github.com/thenationofalex/remote-dictionary",
+  "license": "GNU GPL",
+  "main": "lib/index.js",
+  "oclif": {
+    "bin": "remote-dictionary-client"
+  },
+  "repository": "https://github.com/thenationofalex/remote-dictionary",
+  "scripts": {
+    "posttest": "tslint -p . -t stylish",
+    "prepack": "rm -rf lib && tsc -b",
+    "test": "echo NO TESTS"
+  },
+  "types": "lib/index.d.ts"
 }

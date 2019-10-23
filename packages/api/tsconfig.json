@@ -8,7 +8,8 @@
     "outDir": "build",
     "lib": ["esnext", "es2015.iterable", "dom", "dom.iterable", "scripthost"],
     "skipLibCheck": true,
-    "pretty": true
+    "pretty": true,
+    "resolveJsonModule": true
   },
   "exclude": ["tests"]
 }

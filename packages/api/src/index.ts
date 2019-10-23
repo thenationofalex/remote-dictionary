@@ -2,20 +2,19 @@ import * as Hapi from '@hapi/hapi'
 import * as Inert from '@hapi/inert'
 import * as Vision from '@hapi/vision'
 import * as HapiSwagger from 'hapi-swagger'
+import * as Package from '../package.json'
 
 import { Config } from './config'
 import routes from './routes'
 import * as dB from './services/db'
 
-const server = Hapi.server({
-  host: Config.app.host,
-  port: Config.app.port
-})
+const { app: { host, port } } = Config
+const server = Hapi.server({ host, port })
 
 const swaggerOptions = {
   info: {
     title: 'Remote Dictionary API',
-    version: '0.0.1-alpha'
+    version: Package.version
   }
 }
 
@@ -32,7 +31,7 @@ const init = async () => {
   await server.route(routes)
   await server.start()
 
-  console.log(`📚 dictionary running`)
+  console.log(`📚 dictionary running - ${host}:${port} - ${Package.version}`)
 }
 
 init()

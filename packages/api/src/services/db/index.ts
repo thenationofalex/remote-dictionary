@@ -25,14 +25,14 @@ const params = {
   TableName: Config.aws.dynamo.tableName
 }
 
-const createTable = async () => dynamodb.createTable(params, (err, data) => {
+const createTable = async () => dynamodb.createTable(params, (err) => {
   if (err) {
     if (_.has('code')(err) && err.code === 'ResourceInUseException') {
       return false
     }
-    console.error('Unable to create table. Error JSON:', JSON.stringify(err, null, 2));
+    console.error('Unable to create table. Error JSON:', JSON.stringify(err, null, 2))
   } else {
-    console.log('Created table. Table description JSON:', JSON.stringify(data, null, 2));
+    console.log('Created table')
   }
 })
 
