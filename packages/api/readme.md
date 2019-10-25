@@ -24,7 +24,7 @@ Swagger docs available via `http://localhost:3000/documentation`
     Default output format [None]: json
   ```
 
-- Ensure an available connection to DynamoDB is setup. See [https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.html](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.html)
+- Ensure an available connection to DynamoDB is [setup](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.html).
 
 #### 📖 Commands
 
@@ -32,3 +32,4 @@ Command                | Purpose
 :--------------------- | :----------------------------------------------
 `npm run dev`          | Run development server
 `npm run lint`         | Lint codebase
+`npm run test`         | Run jest test suite

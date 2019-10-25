@@ -1,4 +1,4 @@
-import server from '.'
+import server from './index'
 
 beforeAll((done) => {
   server.events.on('start', () => {
@@ -13,12 +13,13 @@ afterAll((done) => {
   server.stop()
 })
 
-test('should success with server connection', async (done) => {
+test('should success with healthcheck', async (done) => {
   const options = {
       method: 'GET',
       url: '/healthcheck'
-  };
-  const data = await server.inject(options);
-  expect(data.statusCode).toBe(200);
-  done();
-});
+  }
+  const data = await server.inject(options)
+  expect(data.statusCode).toBe(200)
+  expect(data.payload).toBe(JSON.stringify({ hapi: 'happy' }))
+  done()
+})

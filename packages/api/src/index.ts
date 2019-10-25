@@ -30,9 +30,13 @@ const init = async () => {
   ])
   await server.route(routes)
   await server.start()
-
   console.log(`📚 dictionary running - ${host}:${port} - ${Package.version}`)
 }
+
+process.on('unhandledRejection', (err) => {
+  console.log(err)
+  process.exit(1)
+})
 
 init()
 
