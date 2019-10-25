@@ -12,7 +12,7 @@
     "dev": "NODE_ENV=local nodemon -e ts -x ts-node src/index.ts",
     "start": "ts-node src/index.ts",
     "lint": "tslint -c tslint.json 'src/**/*.{ts,tsx}'",
-    "test": "jest"
+    "test": "jest --coverage --silent"
   },
   "author": "thenationofalex",
   "dependencies": {

@@ -33,11 +33,6 @@ const init = async () => {
   console.log(`📚 dictionary running - ${host}:${port} - ${Package.version}`)
 }
 
-process.on('unhandledRejection', (err) => {
-  console.log(err)
-  process.exit(1)
-})
-
 init()
 
 export default server
