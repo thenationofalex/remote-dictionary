@@ -1,4 +1,6 @@
 import server from './index'
+import * as dB from './services/db'
+jest.mock('./services/db')
 
 beforeAll((done) => {
   server.events.on('start', () => {
@@ -19,6 +21,9 @@ test('should success with healthcheck', async (done) => {
       url: '/healthcheck'
   }
   const data = await server.inject(options)
+  // @ts-ignore
+  dB.createTable = jest.fn().mockResolvedValueOnce(true)
+
   expect(data.statusCode).toBe(200)
   expect(data.payload).toBe(JSON.stringify({ hapi: 'happy' }))
   done()

@@ -15,7 +15,9 @@ export const getDictionary = async (): Promise<IDictionary|boolean> => {
       return data
     }).promise()
 
-    const words = _.map((word: IWord) => word.word.S)(getWords.Items)
+    const words = !_.isEmpty(getWords.Items)
+      ? _.map((word: IWord) => word.word.S)(getWords.Items)
+      : []
 
     return {
       dictionaries: ['typescript', 'node', 'npm', 'en-gb', 'companies', 'misc'],
@@ -25,6 +27,7 @@ export const getDictionary = async (): Promise<IDictionary|boolean> => {
       words
     }
   } catch (e) {
+    console.error(e)
     return false
   }
 }
@@ -34,12 +37,12 @@ export const patchDictionary = (words: Array<string>): boolean => {
     _.each((word: string) => {
       db.dynamodb.putItem({
         Item: {
-          word: {S: word}
+          word: {S: word.toLowerCase()}
         },
         TableName
       }, (err) => {
         if (err) {
-          console.error('Unable to add item. Error JSON:', JSON.stringify(err, null, 2))
+          console.error('Unable to add item.', JSON.stringify(err, null, 2))
         }
       })
     })(words)
