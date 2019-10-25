@@ -1,5 +1,6 @@
 .DS_Store
 node_modules
 lerna-debug.log
+packages/api/coverage
 packages/client/lib
 packages/test

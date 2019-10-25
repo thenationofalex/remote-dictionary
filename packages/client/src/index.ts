@@ -1,7 +1,8 @@
 import {Command, flags} from '@oclif/command'
 import axios from 'axios'
-import { exec } from 'child_process'
+import {execSync} from 'child_process'
 import * as fs from 'fs'
+import * as path from 'path'
 import * as tmp from 'tmp'
 
 class RemoteDictionaryClient extends Command {
@@ -40,18 +41,22 @@ class RemoteDictionaryClient extends Command {
           fs.writeFileSync(tmpFile.name, JSON.stringify(resp.data))
 
           // Run spell check
-          this.log(`👓Spell checking ${flags.src}`)
-          exec(`cspell ${flags.src} --config ${tmpFile.name}`)
+          this.log(`👓 Spell checking ${flags.src}`)
+          const cSpellPath = `${path.resolve(__dirname, '..')}/node_modules/.bin/cspell`
+          const spellcheck = execSync(`node ${cSpellPath} ${flags.src}`).toString()
+          // const spellcheck = execSync(`node ${cSpellPath} ${flags.src} --config ${tmpFile.name}`).toString()
+          this.log(spellcheck)
 
           // Clean up
-          this.log('🧹 Cleaning up')
-          tmpFile.removeCallback()
+          // this.log('🧹 Cleaning up')
+          // tmpFile.removeCallback()
         })
         .catch(e => this.error(`Failed to fetch dictionary: ${e}`))
     } catch (e) {
       this.error(e)
     }
   }
+
 }
 
 export = RemoteDictionaryClient
