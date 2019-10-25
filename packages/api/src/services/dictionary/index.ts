@@ -8,7 +8,9 @@ const { aws: { dynamo: { tableName: TableName }} } = Config
 
 export const getDictionary = async (): Promise<IDictionary|boolean> => {
   try {
-    const getWords = await db.dynamodb.scan({ TableName }, (err, data) => {
+    const getWords = await db.dynamodb.scan({
+      TableName
+    }, (err, data) => {
       if (err) {
         return err
       }
@@ -61,11 +63,11 @@ export const deleteDictionary = async (word: string): Promise<boolean> => {
         word: {S: word}
       },
       TableName
-    }, (err, data) => {
-      if (err) {
-        return err
+    }, (deleteErr, deleteData) => {
+      if (deleteErr) {
+        return deleteErr
       }
-      return data
+      return deleteData
     }).promise()
     return true
   } catch (e) {

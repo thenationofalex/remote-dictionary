@@ -1,5 +1,7 @@
 ## 📚 Remote cspell dictionary
 
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=thenationofalex_remote-dictionary&metric=alert_status)](https://sonarcloud.io/dashboard?id=thenationofalex_remote-dictionary)
+
 [Cspell](https://github.com/streetsidesoftware/cspell#readme) lets you create a list of allowed words in your codebase.
 Keeping this list up to date across multiple repos is a time consuming process.
 
