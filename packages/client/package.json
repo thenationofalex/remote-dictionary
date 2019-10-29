@@ -41,8 +41,7 @@
   "repository": "https://github.com/thenationofalex/remote-dictionary",
   "scripts": {
     "posttest": "tslint -p . -t stylish",
-    "prepack": "rm -rf lib && tsc -b",
-    "test": "echo NO TESTS"
+    "prepack": "rm -rf lib && tsc -b"
   },
   "types": "lib/index.d.ts"
 }
