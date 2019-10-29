@@ -1,6 +1,6 @@
 import {Command, flags} from '@oclif/command'
 import axios from 'axios'
-import {execSync} from 'child_process'
+import {exec} from 'child_process'
 import * as fs from 'fs'
 import * as path from 'path'
 import * as tmp from 'tmp'
@@ -33,25 +33,32 @@ class RemoteDictionaryClient extends Command {
 
     try {
       this.log(`📡 Fetching word list from ${flags.api}`)
-      axios.get(flags.api)
+      const fetchedDictionary = await axios.get(flags.api)
         .then(resp => {
-          // Temp files
           const tmpFile = tmp.fileSync({mode: 0o644, postfix: '.json'})
           this.log(`📚 Saving tmp file to ${tmpFile.name}`)
           fs.writeFileSync(tmpFile.name, JSON.stringify(resp.data))
-
-          // Run spell check
-          this.log(`👓 Spell checking ${flags.src}`)
-          const cSpellPath = `${path.resolve(__dirname, '..')}/node_modules/.bin/cspell`
-          const spellcheck = execSync(`node ${cSpellPath} ${flags.src}`).toString()
-          // const spellcheck = execSync(`node ${cSpellPath} ${flags.src} --config ${tmpFile.name}`).toString()
-          this.log(spellcheck)
-
-          // Clean up
-          // this.log('🧹 Cleaning up')
-          // tmpFile.removeCallback()
+          return tmpFile
         })
         .catch(e => this.error(`Failed to fetch dictionary: ${e}`))
+
+      // Run spell check
+      this.log(`👓 Spell checking ${flags.src}`)
+      const cSpellPath = `${path.resolve(__dirname, '..')}/node_modules/.bin/cspell`
+
+      exec(`node ${cSpellPath} ${flags.src} --config ${fetchedDictionary.name}`, (err, stdout, stderr) => {
+        if (err) {
+          this.log(err.toString())
+          //return
+        }
+
+        this.log(stdout)
+        this.log(stderr)
+        // Clean up
+        this.log('🧹 Cleaning up')
+        fetchedDictionary.removeCallback()
+      })
+
     } catch (e) {
       this.error(e)
     }

@@ -9,7 +9,13 @@ import routes from './routes'
 import * as dB from './services/db'
 
 const { app: { host, port } } = Config
-const server = Hapi.server({ host, port })
+const server = Hapi.server({
+  compression: {
+    minBytes: 1024
+  },
+  host,
+  port
+})
 
 const swaggerOptions = {
   info: {
@@ -18,7 +24,7 @@ const swaggerOptions = {
   }
 }
 
-const init = async () => {
+export const init = async () => {
   await dB.createTable()
   await server.register([
     Inert,
