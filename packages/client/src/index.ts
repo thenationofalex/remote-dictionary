@@ -13,8 +13,6 @@ class RemoteDictionaryClient extends Command {
     help: flags.help({char: 'h'}),
     api: flags.string({
       char: 'a',
-      // tslint:disable-next-line: no-http-string
-      default: 'http://127.0.0.1:3000/dictionary',
       description: 'API endpoint'
     }),
     src: flags.string({
@@ -27,8 +25,13 @@ class RemoteDictionaryClient extends Command {
   async run() {
     const {flags} = this.parse(RemoteDictionaryClient)
 
-    if (!flags.api || !flags.src) {
-      this.log('Missing params, using defaults')
+    if (!flags.api) {
+      this.log('Missing api endpoint - ending')
+      return false
+    }
+
+    if (!flags.src) {
+      this.log('Missing src params, using defaults')
     }
 
     try {
@@ -42,19 +45,15 @@ class RemoteDictionaryClient extends Command {
         })
         .catch(e => this.error(`Failed to fetch dictionary: ${e}`))
 
-      // Run spell check
       this.log(`👓 Spell checking ${flags.src}`)
       const cSpellPath = `${path.resolve(__dirname, '..')}/node_modules/.bin/cspell`
 
-      exec(`node ${cSpellPath} ${flags.src} --config ${fetchedDictionary.name}`, (err, stdout, stderr) => {
-        if (err) {
-          this.log(err.toString())
-          //return
+      exec(`node ${cSpellPath} ${flags.src} --config ${fetchedDictionary.name}`, (_err, stdout, stderr) => {
+        if (stdout) {
+          this.log(stdout)
         }
 
-        this.log(stdout)
         this.log(stderr)
-        // Clean up
         this.log('🧹 Cleaning up')
         fetchedDictionary.removeCallback()
       })

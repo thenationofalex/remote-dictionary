@@ -5,3 +5,4 @@ packages/api/coverage
 packages/api/lib
 packages/client/lib
 packages/test
+*.tf
