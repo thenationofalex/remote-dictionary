@@ -9,3 +9,5 @@ packages/test
 
 *.tfstate*
 .terraform
+
+output.json
