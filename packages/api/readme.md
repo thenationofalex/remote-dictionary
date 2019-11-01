@@ -10,6 +10,7 @@ Swagger docs available via `http://localhost:3000/documentation`
 - [Hapi 18](http://hapijs.com/)
 - [AWS SDK](https://aws.amazon.com/tools/)
 - [Lodash FP](https://github.com/lodash/lodash/wiki/FP-Guide)
+- [Terraform](https://www.terraform.io/)
 
 #### 🏗️ Setup
 
@@ -25,6 +26,13 @@ Swagger docs available via `http://localhost:3000/documentation`
   ```
 
 - Ensure an available connection to DynamoDB is [setup](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.html).
+- Define variables in terraform files `*.tf` if being used
+
+#### 📡 Deployment
+
+The API can be run on a traditional server. Just compile the codebase and run the application from `lib/src/index.js`
+
+[Hapi-Lambda](https://www.npmjs.com/package/hapi-lambda) Has also been setup so you can run the API on a Lambda. `lib/src/lambda.js`
 
 #### 📖 Commands
 
@@ -33,3 +41,4 @@ Command                | Purpose
 `npm run dev`          | Run development server
 `npm run lint`         | Lint codebase
 `npm run test`         | Run jest test suite
+`npm run compile`      | Compile application

@@ -5,5 +5,5 @@ export const healthcheck = {
     handler: (req, h) => ({hapi: 'happy'}),
     tags: ['api']
   },
-  path: '/healthcheck'
+  path: '/'
 }
