@@ -1,8 +1,11 @@
 .DS_Store
 node_modules
 lerna-debug.log
+
 packages/api/coverage
 packages/api/lib
 packages/client/lib
 packages/test
-*.tf
+
+*.tfstate*
+.terraform

@@ -30,7 +30,9 @@ const createTable = async () => dynamodb.createTable(params, (err) => {
     if (_.has('code')(err) && err.code === 'ResourceInUseException') {
       return false
     }
-    console.error('Unable to create table. Error JSON:', JSON.stringify(err, null, 2))
+    const formattedErr = JSON.stringify(err, null, 2)
+    console.error('Unable to create table. Error JSON:', formattedErr)
+    throw new Error(formattedErr)
   } else {
     console.log('Created table')
   }

@@ -7,9 +7,9 @@ export const Config = {
   },
   aws: {
     dynamo: {
-      endpoint: 'http://localhost:8000',
+      endpoint: env.DYNAMO_ENDPOINT || 'http://localhost:8000',
       region: env.NODE_ENV === 'local' ? 'local' : 'ap-southeast-2',
-      tableName: 'Dictionary'
+      tableName: env.DYNAMO_TABLE_NAME || 'Dictionary'
     }
   }
 }
