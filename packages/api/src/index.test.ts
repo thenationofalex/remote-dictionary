@@ -1,5 +1,7 @@
-import server from './index'
+import { healthcheck } from './routes/healthcheck'
+import server from './server'
 import * as dB from './services/db'
+
 jest.mock('./services/db')
 
 beforeAll((done) => {
@@ -15,10 +17,10 @@ afterAll((done) => {
   server.stop()
 })
 
-test('should success with healthcheck', async (done) => {
+test('should resolve healthcheck url `/`', async (done) => {
   const options = {
       method: 'GET',
-      url: '/healthcheck'
+      url: '/'
   }
   const data = await server.inject(options)
   // @ts-ignore

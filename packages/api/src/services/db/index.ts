@@ -35,6 +35,7 @@ const createTable = async () => dynamodb.createTable(params, (err) => {
     throw new Error(formattedErr)
   } else {
     console.log('Created table')
+    return true
   }
 })
 

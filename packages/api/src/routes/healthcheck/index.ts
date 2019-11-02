@@ -1,9 +1,15 @@
 export const healthcheck = {
-  method: 'GET',
-  options: {
-    description: 'API Status',
-    handler: (req, h) => ({hapi: 'happy'}),
-    tags: ['api']
+  name: 'healthcheck',
+  register: async (server, option) => {
+    server.route({
+      handler: (req, h) => ({hapi: 'happy'}),
+      method: 'GET',
+      options: {
+        description: 'API Status',
+        tags: ['api']
+      },
+      path: '/'
+    })
   },
-  path: '/'
+  version: '1.0.0'
 }

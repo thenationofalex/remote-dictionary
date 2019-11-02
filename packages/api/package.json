@@ -10,6 +10,7 @@
   "scripts": {
     "compile": "rm -rf lib && tsc",
     "dev": "NODE_ENV=local nodemon -e ts -x ts-node src/index.ts",
+    "dev:compile": "tsc",
     "start": "ts-node src/index.ts",
     "lint": "tslint -c tslint.json 'src/**/*.{ts,tsx}'",
     "test": "jest --coverage --silent"
@@ -21,7 +22,6 @@
     "@hapi/joi": "15.1.1",
     "@hapi/vision": "^5.5.4",
     "aws-sdk": "^2.553.0",
-    "hapi-lambda": "^1.0.0",
     "hapi-swagger": "^10.2.0",
     "lodash": "^4.17.15"
   },
