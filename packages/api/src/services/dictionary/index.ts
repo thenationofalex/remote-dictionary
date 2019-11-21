@@ -18,7 +18,7 @@ export const getDictionary = async (): Promise<IDictionary|boolean> => {
     }).promise()
 
     const words = !_.isEmpty(getWords.Items)
-      ? _.map((word: IWord) => word.word.S)(getWords.Items)
+      ? _.map((Item: IWord) => Item.word.S)(getWords.Items)
       : []
 
     return {
@@ -34,26 +34,34 @@ export const getDictionary = async (): Promise<IDictionary|boolean> => {
   }
 }
 
-export const patchDictionary = (words: Array<string>): boolean => {
-  try {
-    _.each((word: string) => {
-      db.dynamodb.putItem({
-        Item: {
-          word: {S: word.toLowerCase()}
-        },
-        TableName
-      }, (err) => {
-        if (err) {
-          console.error('Unable to add item.', JSON.stringify(err, null, 2))
-        }
-      })
-    })(words)
+export const patchDictionary = async (words: Array<string>): Promise<boolean> => {
+  const wordList = []
+  const formatWordItems = (word: string) => new Promise((resolve) => wordList.push({
+    PutRequest: {
+      Item: { word: { S: _.lowerCase(word) } }
+    }
+  }))
 
-    return true
-  } catch (e) {
-    console.error(e)
-    return false
-  }
+  const prepareWordList = _.each((word: string) => formatWordItems(word))(words)
+
+  return Promise.all(prepareWordList)
+    .then(async () => {
+      try {
+        await db.dynamodb.batchWriteItem({
+          RequestItems: {
+            [TableName]: wordList
+          }
+        }, (err) => {
+          if (err) {
+            console.error('Unable to add item.', JSON.stringify(err, null, 2))
+          }
+        }).promise()
+        return true
+      } catch (e) {
+        console.error(e)
+        return false
+      }
+    })
 }
 
 export const deleteDictionary = async (word: string): Promise<boolean> => {
