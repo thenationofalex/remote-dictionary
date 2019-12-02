@@ -16,7 +16,7 @@ variable "app_version" {
 
 provider "aws" {
   profile = "default"
-  region = "${var.region}"
+  region  = "${var.region}"
 }
 
 resource "aws_lambda_function" "remote-dictionary" {
@@ -91,6 +91,14 @@ EOF
 }
 
 resource "aws_iam_role_policy_attachment" "lambda_logs" {
-  role = "${aws_iam_role.lambda_exec.name}"
+  role       = "${aws_iam_role.lambda_exec.name}"
   policy_arn = "${aws_iam_policy.lambda_logging.arn}"
 }
+
+ resource "aws_lambda_permission" "apigw" {
+   statement_id  = "AllowAPIGatewayInvoke"
+   action        = "lambda:InvokeFunction"
+   function_name = aws_lambda_function.remote-dictionary.function_name
+   principal     = "apigateway.amazonaws.com"
+   source_arn    = "${aws_api_gateway_rest_api.remote-dictionary.execution_arn}/*/*"
+ }

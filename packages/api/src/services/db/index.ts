@@ -20,7 +20,7 @@ const params = {
   ],
   ProvisionedThroughput: {
     ReadCapacityUnits: 10,
-    WriteCapacityUnits: 5
+    WriteCapacityUnits: 1
   },
   TableName: Config.aws.dynamo.tableName
 }

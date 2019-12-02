@@ -51,3 +51,7 @@ resource "aws_api_gateway_deployment" "remote-dictionary" {
   rest_api_id = "${aws_api_gateway_rest_api.remote-dictionary.id}"
   stage_name  = "dev"
 }
+
+output "base_url" {
+  value = aws_api_gateway_deployment.remote-dictionary.invoke_url
+}
