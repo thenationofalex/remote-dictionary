@@ -1,7 +1,7 @@
 import { Config } from '../../config'
 import * as dB from '../db'
 import {
-  deleteDictionary,
+  deleteItemFromDictionary,
   getDictionary,
   patchDictionary
 } from './index'
@@ -36,5 +36,5 @@ test('delete word from list', async () => {
     TableName
   }).promise()
 
-  expect(await deleteDictionary(wordTodelete)).toBe(true)
+  expect(await deleteItemFromDictionary(wordTodelete)).toBe(true)
 })

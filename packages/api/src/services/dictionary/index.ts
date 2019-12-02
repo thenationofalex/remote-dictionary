@@ -53,7 +53,7 @@ export const patchDictionary = async (words: Array<string>): Promise<boolean> =>
           }
         }, (err) => {
           if (err) {
-            console.error('Unable to add item.', JSON.stringify(err, null, 2))
+            console.error('Unable to add item.', JSON.stringify(err))
           }
         }).promise()
         return true
@@ -64,7 +64,7 @@ export const patchDictionary = async (words: Array<string>): Promise<boolean> =>
     })
 }
 
-export const deleteDictionary = async (word: string): Promise<boolean> => {
+export const deleteItemFromDictionary = async (word: string): Promise<boolean> => {
   try {
     await db.dynamodb.deleteItem({
       Key: {

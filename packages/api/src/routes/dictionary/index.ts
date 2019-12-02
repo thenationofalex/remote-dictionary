@@ -1,6 +1,10 @@
 import * as Joi from '@hapi/joi'
 
-import { deleteDictionary, getDictionary, patchDictionary } from '../../services/dictionary'
+import {
+  deleteItemFromDictionary,
+  getDictionary,
+  patchDictionary
+} from '../../services/dictionary'
 
 export const dictionary = {
   name: 'dictionary',
@@ -29,7 +33,7 @@ export const dictionary = {
       path: '/dictionary'
     })
     server.route({
-      handler: (req, h) => deleteDictionary(req.payload.words),
+      handler: (req, h) => deleteItemFromDictionary(req.payload.words),
       method: 'DELETE',
       options: {
         description: 'Delete word from API',
