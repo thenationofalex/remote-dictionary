@@ -12,7 +12,7 @@
     "@oclif/config": "^1.13.3",
     "@oclif/plugin-help": "^2.2.1",
     "@types/tmp": "^0.1.0",
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "cspell": "^4.0.32",
     "path": "^0.12.7",
     "tmp": "^0.1.0",
